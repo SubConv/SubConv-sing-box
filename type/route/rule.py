@@ -2,7 +2,7 @@ from ..common import IpVersion, Network, Protocol
 
 from dataclasses import dataclass
 
-@dataclass
+@dataclass(kw_only=True)
 class Rule:
     inbound: list[str]
     ip_version: IpVersion = None

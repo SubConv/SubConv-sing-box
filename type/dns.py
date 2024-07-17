@@ -3,7 +3,7 @@ import typing
 
 from dataclasses import dataclass
 
-@dataclass
+@dataclass(kw_only=True)
 class Server:
     address: str
     tag: str = None
@@ -13,7 +13,7 @@ class Server:
     detour: str = None
     client_subnet: str = None
 
-@dataclass
+@dataclass(kw_only=True)
 class Rule:
     inbound: list[str]
     server: str
@@ -53,14 +53,14 @@ class Rule:
     rule_set_ip_cidr_accept_empty: bool = None
 
 
-@dataclass
+@dataclass(kw_only=True)
 class Fakeip:
     enabled: bool = True
     inet4_range: str = None
     inet6_range: str = None
 
 
-@dataclass
+@dataclass(kw_only=True)
 class Dns:
     servers: list[Server] = None
     rules: list[Rule] = None

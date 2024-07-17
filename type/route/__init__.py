@@ -3,7 +3,7 @@ from .rule_set import Rule_set
 
 from dataclasses import dataclass
 
-@dataclass
+@dataclass(kw_only=True)
 class Route:
     rules: list[Rule]
     rule_set: list[Rule_set]

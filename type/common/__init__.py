@@ -26,7 +26,7 @@ class Protocol(enum.Enum):
     bittorrent = "bittorrent"
     dtls = "dtls"
 
-@dataclass
+@dataclass(kw_only=True)
 class Listen:
     listen: str
     listen_port: int = None
@@ -41,19 +41,19 @@ class Listen:
     domain_strategy: Strategy = None
     udp_disable_domain_unmapping: bool = None
 
-@dataclass
+@dataclass(kw_only=True)
 class Utls:
     enabled: bool = True
     fingerprint: str = None
 
-@dataclass
+@dataclass(kw_only=True)
 class Reality:
     public_key: str
     short_id: str
     enabled: bool = True
     max_time_difference: str = None
 
-@dataclass
+@dataclass(kw_only=True)
 class Tls:
     enabled: bool = True
     disable_sni: bool = None
@@ -66,13 +66,13 @@ class Tls:
     utls: Utls = None
     reality: Reality = None
 
-@dataclass
+@dataclass(kw_only=True)
 class Brutal:
     up_mbps: int
     down_mbps: int
     enabled: bool = True
 
-@dataclass
+@dataclass(kw_only=True)
 class Multiplex:
     enabled: bool = True
     protocol: str = None
@@ -82,7 +82,7 @@ class Multiplex:
     padding: bool = None
     brutal: Brutal = None
 
-@dataclass
+@dataclass(kw_only=True)
 class Udp_over_tcp:
     enabled: bool = True
     version: int = None

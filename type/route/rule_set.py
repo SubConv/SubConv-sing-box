@@ -13,12 +13,12 @@ def rule_set(type: str):
         return cls
     return wrapper
 
-@dataclass
+@dataclass(kw_only=True)
 class Rule_set:
     type: str
     tag: str
 
-@dataclass
+@dataclass(kw_only=True)
 class HeadlessRule:
     query_type: typing.List[typing.Union[int, str]] = None
     network: list[str] = None

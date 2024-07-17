@@ -1,6 +1,7 @@
 from .common import Network, Tls, Multiplex, Udp_over_tcp, v2transport
 
 import typing
+import enum
 from dataclasses import dataclass
 
 _T = typing.TypeVar('_T')
@@ -9,30 +10,31 @@ def outbound(type: str):
     def wrapper(cls: _T) -> _T:
         orig_init = cls.__init__
         def __init__(self, **kwargs):
-            orig_init(self, type=type, **kwargs)
+            kwargs["type"] = type
+            orig_init(self, **kwargs)
         cls.__init__ = __init__
         return cls
     return wrapper
 
-@dataclass
+@dataclass(kw_only=True)
 class Outbound:
     type: str
     tag: str
 
 @outbound("direct")
-@dataclass
+@dataclass(kw_only=True)
 class Direct(Outbound):
     override_address: str = None
     override_port: int = None
     proxy_protocol: int = None
 
 @outbound("block")
-@dataclass
+@dataclass(kw_only=True)
 class Block(Outbound):
     pass
 
 @outbound("socks")
-@dataclass
+@dataclass(kw_only=True)
 class Socks(Outbound):
     server: str
     server_port: int
@@ -43,7 +45,7 @@ class Socks(Outbound):
     udp_over_tcp: Udp_over_tcp = None
 
 @outbound("http")
-@dataclass
+@dataclass(kw_only=True)
 class Http(Outbound):
     server: str
     server_port: int
@@ -54,7 +56,7 @@ class Http(Outbound):
     tls: Tls = None
 
 @outbound("shadowsocks")
-@dataclass
+@dataclass(kw_only=True)
 class Shadowsocks(Outbound):
     server: str
     server_port: int
@@ -67,7 +69,7 @@ class Shadowsocks(Outbound):
     multiplex: Multiplex = None
 
 @outbound("vmess")
-@dataclass
+@dataclass(kw_only=True)
 class Vmess(Outbound):
     server: str
     server_port: int
@@ -83,7 +85,7 @@ class Vmess(Outbound):
     transport: v2transport.V2transport = None
 
 @outbound("trojan")
-@dataclass
+@dataclass(kw_only=True)
 class Trojan(Outbound):
     server: str
     server_port: int
@@ -94,7 +96,7 @@ class Trojan(Outbound):
     transport: v2transport.V2transport = None
 
 @outbound("wireguard")
-@dataclass
+@dataclass(kw_only=True)
 class Wireguard(Outbound):
     server: str
     server_port: int
@@ -111,7 +113,7 @@ class Wireguard(Outbound):
     network: Network = None
 
 @outbound("hysteria")
-@dataclass
+@dataclass(kw_only=True)
 class Hysteria(Outbound):
     server: str
     server_port: int
@@ -127,7 +129,7 @@ class Hysteria(Outbound):
     network: Network = None
 
 @outbound("shadowtls")
-@dataclass
+@dataclass(kw_only=True)
 class Shadowtls(Outbound):
     server: str
     server_port: int
@@ -136,7 +138,7 @@ class Shadowtls(Outbound):
     password: str = None
 
 @outbound("vless")
-@dataclass
+@dataclass(kw_only=True)
 class Vless(Outbound):
     server: str
     server_port: int
@@ -149,8 +151,8 @@ class Vless(Outbound):
     transport: v2transport.V2transport = None
 
 @outbound("tuic")
-@dataclass
-class Tuic:
+@dataclass(kw_only=True)
+class Tuic(Outbound):
     server: str
     server_port: int
     uuid: str
@@ -163,14 +165,14 @@ class Tuic:
     heartbeat: str = None
     network: Network = None
 
-@dataclass
+@dataclass(kw_only=True)
 class Hysteria2_obfs:
     type: str
     password: str
 
 @outbound("hysteria2")
-@dataclass
-class Hysteria2:
+@dataclass(kw_only=True)
+class Hysteria2(Outbound):
     server: str
     server_port: int
     tls: Tls
@@ -182,16 +184,16 @@ class Hysteria2:
     brutal_debug: bool = None
 
 @outbound("tor")
-@dataclass
-class Tor:
+@dataclass(kw_only=True)
+class Tor(Outbound):
     executable_path: str = None
     extra_args: list = None
     data_directory: str = None
     torrc: dict = None
 
 @outbound("ssh")
-@dataclass
-class Ssh:
+@dataclass(kw_only=True)
+class Ssh(Outbound):
     server: str
     server_port: int = None
     user: str = None
@@ -204,20 +206,20 @@ class Ssh:
     client_version: str = None
 
 @outbound("dns")
-@dataclass
-class Dns:
+@dataclass(kw_only=True)
+class Dns(Outbound):
     pass
 
 @outbound("selector")
-@dataclass
-class Selector:
+@dataclass(kw_only=True)
+class Selector(Outbound):
     outbounds: list[str]
     default: str = None
     interrupt_exist_connections: bool = None
 
 @outbound("urltest")
-@dataclass
-class Urltest:
+@dataclass(kw_only=True)
+class Urltest(Outbound):
     outbounds: list[str]
     url: str = None
     interval: str = None

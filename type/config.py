@@ -7,7 +7,7 @@ from .experimental import Experimental
 
 from dataclasses import dataclass
 
-@dataclass
+@dataclass(kw_only=True)
 class Config:
     log: Log = None
     dns: Dns = None
