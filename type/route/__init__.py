@@ -1,12 +1,11 @@
 from .rule import Rule
 from .rule_set import Rule_set
 
-from dataclasses import dataclass
+from pydantic import BaseModel, SerializeAsAny
 
-@dataclass(kw_only=True)
-class Route:
+class Route(BaseModel):
     rules: list[Rule]
-    rule_set: list[Rule_set]
+    rule_set: list[SerializeAsAny[Rule_set]]
     final: str = None
     auto_detect_interface: bool = None
     override_android_vpn: bool = None

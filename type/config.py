@@ -5,13 +5,12 @@ from .outbound import Outbound
 from .route import Route
 from .experimental import Experimental
 
-from dataclasses import dataclass
+from pydantic import BaseModel, SerializeAsAny
 
-@dataclass(kw_only=True)
-class Config:
+class Config(BaseModel):
     log: Log = None
     dns: Dns = None
-    inbounds: list[Inbound] = None
-    outbounds: list[Outbound] = None
+    inbounds: list[SerializeAsAny[Inbound]] = None
+    outbounds: list[SerializeAsAny[Outbound]] = None
     route: Route = None
     experimental: Experimental = None

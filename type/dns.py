@@ -1,10 +1,9 @@
 from .common import Strategy, IpVersion, Network, Protocol
 import typing
 
-from dataclasses import dataclass
+from pydantic import BaseModel
 
-@dataclass(kw_only=True)
-class Server:
+class Server(BaseModel):
     address: str
     tag: str = None
     address_resolver: str = None
@@ -13,8 +12,7 @@ class Server:
     detour: str = None
     client_subnet: str = None
 
-@dataclass(kw_only=True)
-class Rule:
+class Rule(BaseModel):
     inbound: list[str]
     server: str
     ip_version: IpVersion = None
@@ -53,15 +51,13 @@ class Rule:
     rule_set_ip_cidr_accept_empty: bool = None
 
 
-@dataclass(kw_only=True)
-class Fakeip:
+class Fakeip(BaseModel):
     enabled: bool = True
     inet4_range: str = None
     inet6_range: str = None
 
 
-@dataclass(kw_only=True)
-class Dns:
+class Dns(BaseModel):
     servers: list[Server] = None
     rules: list[Rule] = None
     final: str = None

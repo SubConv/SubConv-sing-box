@@ -1,8 +1,7 @@
 from .common import Network, Tls, Multiplex, Udp_over_tcp, v2transport
 
 import typing
-import enum
-from dataclasses import dataclass
+from pydantic import BaseModel, SerializeAsAny
 
 _T = typing.TypeVar('_T')
 
@@ -16,25 +15,21 @@ def outbound(type: str):
         return cls
     return wrapper
 
-@dataclass(kw_only=True)
-class Outbound:
+class Outbound(BaseModel):
     type: str
     tag: str
 
 @outbound("direct")
-@dataclass(kw_only=True)
 class Direct(Outbound):
     override_address: str = None
     override_port: int = None
     proxy_protocol: int = None
 
 @outbound("block")
-@dataclass(kw_only=True)
 class Block(Outbound):
     pass
 
 @outbound("socks")
-@dataclass(kw_only=True)
 class Socks(Outbound):
     server: str
     server_port: int
@@ -45,7 +40,6 @@ class Socks(Outbound):
     udp_over_tcp: Udp_over_tcp = None
 
 @outbound("http")
-@dataclass(kw_only=True)
 class Http(Outbound):
     server: str
     server_port: int
@@ -56,7 +50,6 @@ class Http(Outbound):
     tls: Tls = None
 
 @outbound("shadowsocks")
-@dataclass(kw_only=True)
 class Shadowsocks(Outbound):
     server: str
     server_port: int
@@ -69,7 +62,6 @@ class Shadowsocks(Outbound):
     multiplex: Multiplex = None
 
 @outbound("vmess")
-@dataclass(kw_only=True)
 class Vmess(Outbound):
     server: str
     server_port: int
@@ -82,10 +74,9 @@ class Vmess(Outbound):
     tls: Tls = None
     packet_encoding: str = None
     multiplex: Multiplex = None
-    transport: v2transport.V2transport = None
+    transport: SerializeAsAny[v2transport.V2transport] = None
 
 @outbound("trojan")
-@dataclass(kw_only=True)
 class Trojan(Outbound):
     server: str
     server_port: int
@@ -93,10 +84,9 @@ class Trojan(Outbound):
     network: Network = None
     tls: Tls = None
     multiplex: Multiplex = None
-    transport: v2transport.V2transport = None
+    transport: SerializeAsAny[v2transport.V2transport] = None
 
 @outbound("wireguard")
-@dataclass(kw_only=True)
 class Wireguard(Outbound):
     server: str
     server_port: int
@@ -113,7 +103,6 @@ class Wireguard(Outbound):
     network: Network = None
 
 @outbound("hysteria")
-@dataclass(kw_only=True)
 class Hysteria(Outbound):
     server: str
     server_port: int
@@ -129,7 +118,6 @@ class Hysteria(Outbound):
     network: Network = None
 
 @outbound("shadowtls")
-@dataclass(kw_only=True)
 class Shadowtls(Outbound):
     server: str
     server_port: int
@@ -138,7 +126,6 @@ class Shadowtls(Outbound):
     password: str = None
 
 @outbound("vless")
-@dataclass(kw_only=True)
 class Vless(Outbound):
     server: str
     server_port: int
@@ -148,10 +135,9 @@ class Vless(Outbound):
     tls: Tls = None
     packet_encoding: str = None
     multiplex: Multiplex = None
-    transport: v2transport.V2transport = None
+    transport: SerializeAsAny[v2transport.V2transport] = None
 
 @outbound("tuic")
-@dataclass(kw_only=True)
 class Tuic(Outbound):
     server: str
     server_port: int
@@ -165,13 +151,11 @@ class Tuic(Outbound):
     heartbeat: str = None
     network: Network = None
 
-@dataclass(kw_only=True)
-class Hysteria2_obfs:
+class Hysteria2_obfs(BaseModel):
     type: str
     password: str
 
 @outbound("hysteria2")
-@dataclass(kw_only=True)
 class Hysteria2(Outbound):
     server: str
     server_port: int
@@ -184,7 +168,6 @@ class Hysteria2(Outbound):
     brutal_debug: bool = None
 
 @outbound("tor")
-@dataclass(kw_only=True)
 class Tor(Outbound):
     executable_path: str = None
     extra_args: list = None
@@ -192,7 +175,6 @@ class Tor(Outbound):
     torrc: dict = None
 
 @outbound("ssh")
-@dataclass(kw_only=True)
 class Ssh(Outbound):
     server: str
     server_port: int = None
@@ -206,19 +188,16 @@ class Ssh(Outbound):
     client_version: str = None
 
 @outbound("dns")
-@dataclass(kw_only=True)
 class Dns(Outbound):
     pass
 
 @outbound("selector")
-@dataclass(kw_only=True)
 class Selector(Outbound):
     outbounds: list[str]
     default: str = None
     interrupt_exist_connections: bool = None
 
 @outbound("urltest")
-@dataclass(kw_only=True)
 class Urltest(Outbound):
     outbounds: list[str]
     url: str = None

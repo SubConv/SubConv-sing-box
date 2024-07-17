@@ -1,6 +1,6 @@
 from ..common import IpVersion, Network, Protocol
 
-from dataclasses import dataclass
+from pydantic import BaseModel
 
 import typing
 
@@ -13,13 +13,11 @@ def rule_set(type: str):
         return cls
     return wrapper
 
-@dataclass(kw_only=True)
-class Rule_set:
+class Rule_set(BaseModel):
     type: str
     tag: str
 
-@dataclass(kw_only=True)
-class HeadlessRule:
+class HeadlessRule(BaseModel):
     query_type: typing.List[typing.Union[int, str]] = None
     network: list[str] = None
     domain: list[str] = None
@@ -40,16 +38,16 @@ class HeadlessRule:
     invert: bool = None
 
 @rule_set("inline")
-class Inline:
+class Inline(Rule_set):
     rules: list[HeadlessRule]
 
 @rule_set("local")
-class Local:
+class Local(Rule_set):
     format: str
     path: str
 
 @rule_set("remote")
-class  Remote:
+class Remote(Rule_set):
     format: str
     url: str
     download_detour: str = None

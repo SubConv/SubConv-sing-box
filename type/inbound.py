@@ -1,7 +1,7 @@
 from .common import Network, Listen
 
 import typing
-from dataclasses import dataclass
+from pydantic import BaseModel
 
 _T = typing.TypeVar('_T')
 
@@ -21,31 +21,26 @@ def inbound(type: str):
     return wrapper
 
 
-@dataclass(kw_only=True)
-class Inbound():
+class Inbound(BaseModel):
     type: str
     tag: str
 
 @inbound("direct")
-@dataclass(kw_only=True)
 class Direct(Listen, Inbound):
     network: Network = None
     override_address: str = None
     override_port: int = None
 
 @inbound("mixed")
-@dataclass(kw_only=True)
 class Mixed(Listen, Inbound):
     users: list[dict[str, str]] = None
     set_system_proxy: bool = None
 
 @inbound("socks")
-@dataclass(kw_only=True)
 class Socks(Listen, Inbound):
     users: list[dict[str, str]] = None
 
 @inbound("http")
-@dataclass(kw_only=True)
 class Http(Listen, Inbound):
     users: list[dict[str, str]] = None
     set_system_proxy: bool = None

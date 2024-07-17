@@ -1,7 +1,7 @@
 from . import v2transport
 
 import enum
-from dataclasses import dataclass
+from pydantic import BaseModel
 
 class Strategy(enum.Enum):
     prefer_ipv4 = "prefer_ipv4"
@@ -26,8 +26,7 @@ class Protocol(enum.Enum):
     bittorrent = "bittorrent"
     dtls = "dtls"
 
-@dataclass(kw_only=True)
-class Listen:
+class Listen(BaseModel):
     listen: str
     listen_port: int = None
     tcp_fast_open: bool = None
@@ -41,20 +40,17 @@ class Listen:
     domain_strategy: Strategy = None
     udp_disable_domain_unmapping: bool = None
 
-@dataclass(kw_only=True)
-class Utls:
+class Utls(BaseModel):
     enabled: bool = True
     fingerprint: str = None
 
-@dataclass(kw_only=True)
-class Reality:
+class Reality(BaseModel):
     public_key: str
     short_id: str
     enabled: bool = True
     max_time_difference: str = None
 
-@dataclass(kw_only=True)
-class Tls:
+class Tls(BaseModel):
     enabled: bool = True
     disable_sni: bool = None
     server_name: str = None
@@ -66,14 +62,12 @@ class Tls:
     utls: Utls = None
     reality: Reality = None
 
-@dataclass(kw_only=True)
-class Brutal:
+class Brutal(BaseModel):
     up_mbps: int
     down_mbps: int
     enabled: bool = True
 
-@dataclass(kw_only=True)
-class Multiplex:
+class Multiplex(BaseModel):
     enabled: bool = True
     protocol: str = None
     max_connections: int = None
@@ -82,8 +76,7 @@ class Multiplex:
     padding: bool = None
     brutal: Brutal = None
 
-@dataclass(kw_only=True)
-class Udp_over_tcp:
+class Udp_over_tcp(BaseModel):
     enabled: bool = True
     version: int = None
 

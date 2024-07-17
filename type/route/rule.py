@@ -1,9 +1,8 @@
 from ..common import IpVersion, Network, Protocol
 
-from dataclasses import dataclass
+from pydantic import BaseModel
 
-@dataclass(kw_only=True)
-class Rule:
+class Rule(BaseModel):
     inbound: list[str]
     ip_version: IpVersion = None
     network: Network = None

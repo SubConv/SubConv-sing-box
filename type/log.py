@@ -1,8 +1,6 @@
+from pydantic import BaseModel
 
-from dataclasses import dataclass
-
-@dataclass(kw_only=True)
-class Log:
+class Log(BaseModel):
     disabled: bool = False
     level: str = "info"
     output: str = None

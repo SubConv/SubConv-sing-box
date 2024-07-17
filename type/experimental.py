@@ -1,8 +1,6 @@
+from pydantic import BaseModel
 
-from dataclasses import dataclass
-
-@dataclass(kw_only=True)
-class Cache_file:
+class Cache_file(BaseModel):
     enabled: bool = True
     path: str = None
     cache_id: str = None
@@ -10,8 +8,7 @@ class Cache_file:
     store_rdrc: bool = None
     rdrc_timeout: str = None
 
-@dataclass(kw_only=True)
-class Clash_api:
+class Clash_api(BaseModel):
     external_controller: str = None
     external_ui: str = None
     external_ui_download_url: str = None
@@ -19,20 +16,17 @@ class Clash_api:
     secret: str = None
     default_mode: str = None
 
-@dataclass(kw_only=True)
-class V2ray_api_stat:
+class V2ray_api_stat(BaseModel):
     enabled: bool = None
     inbounds: list[str] = None
     outbounds: list[str] = None
     users: list[str] = None
 
-@dataclass(kw_only=True)
-class V2ray_api:
+class V2ray_api(BaseModel):
     listen: str = None
     stats: V2ray_api_stat = None
 
-@dataclass(kw_only=True)
-class Experimental:
+class Experimental(BaseModel):
     cache_file: Cache_file = None
     clash_api: Clash_api = None
     v2ray_api: V2ray_api = None
