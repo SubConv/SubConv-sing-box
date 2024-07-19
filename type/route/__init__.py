@@ -1,5 +1,5 @@
 from .rule import Rule
-from .rule_set import Rule_set
+from .rule_set import Rule_set, Inline, Local, Remote, HeadlessRule
 
 from pydantic import BaseModel, SerializeAsAny
 
@@ -13,5 +13,11 @@ class Route(BaseModel):
     default_mark: int = None
 
 __all__ = [
-    Route
+    "Rule",
+    "Rule_set",
+    "Route",
+    "Inline",
+    "Local",
+    "Remote",
+    "HeadlessRule"
 ]

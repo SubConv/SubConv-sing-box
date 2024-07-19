@@ -3,7 +3,7 @@ from ..common import IpVersion, Network, Protocol
 from pydantic import BaseModel
 
 class Rule(BaseModel):
-    inbound: list[str]
+    inbound: list[str] = None
     ip_version: IpVersion = None
     network: Network = None
     auth_user: list[str] = None
@@ -29,7 +29,7 @@ class Rule(BaseModel):
     rule_set: list[str] = None
     rule_set_ip_cidr_match_source: bool = None
     invert: bool = None
-    outbound: list[str] = None
+    outbound: str = None
     geoip: list[str] = None
     ip_cidr: list[str] = None
     ip_is_private: bool = None

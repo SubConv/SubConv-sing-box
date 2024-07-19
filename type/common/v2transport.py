@@ -16,7 +16,7 @@ def v2transport(type: str):
 class V2transport(BaseModel):
     type: str
 
-@v2transport("tcp")
+@v2transport("http")
 class Http(V2transport):
     host: list[str] = None
     path: str = None

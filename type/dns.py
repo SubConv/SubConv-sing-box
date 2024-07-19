@@ -13,7 +13,7 @@ class Server(BaseModel):
     client_subnet: str = None
 
 class Rule(BaseModel):
-    inbound: list[str]
+    inbound: list[str] = None
     server: str
     ip_version: IpVersion = None
     query_type: list[typing.Union[int, str]] = None
