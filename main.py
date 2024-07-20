@@ -77,6 +77,8 @@ async def sub(request: Request):
 
     # get the url of original subscription
     url = args.get("url")
+    tun: bool = args.get("tun", True)
+
     url = re.split(r"[|\n]", url)
     # remove empty lines
     urls = list(filter(lambda x: x!="", url)) 
@@ -89,7 +91,7 @@ async def sub(request: Request):
             nodes.extend(get_nodes(response.text))
 
     # get the config from nodes
-    config = get_config(nodes=nodes, base_url=request.base_url)
+    config = get_config(nodes=nodes, base_url=request.base_url, tun=tun)
 
     tmp = config.model_dump(exclude_none=True)
 

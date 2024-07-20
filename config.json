@@ -19,27 +19,21 @@
     ],
     "rules": [
       {
-        "server": "AliDNS",
-        "outbound": [
-          "any"
+        "server": "CfDNS",
+        "ip_cidr": [
+          "240.0.0.0/4"
         ]
       },
       {
-        "server": "CfDNS",
+        "server": "AliDNS",
         "outbound": [
           "direct"
         ]
       },
       {
-        "server": "CfDNS",
+        "server": "AliDNS",
         "outbound": [
-          "🚀 节点选择"
-        ]
-      },
-      {
-        "server": "CfDNS",
-        "ip_cidr": [
-          "240.0.0.0/4"
+          "any"
         ]
       }
     ],
@@ -59,7 +53,21 @@
       "type": "mixed",
       "tag": "mixed-in",
       "listen": "0.0.0.0",
-      "listen_port": 7890
+      "listen_port": 7890,
+      "sniff": true,
+      "domain_strategy": "prefer_ipv6"
+    },
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "sniff": true,
+      "domain_strategy": "prefer_ipv6",
+      "address": [
+        "172.18.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
+      "auto_route": true,
+      "stack": "system"
     }
   ],
   "outbounds": [

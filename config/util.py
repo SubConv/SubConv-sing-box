@@ -22,9 +22,9 @@ def generate_default_config(type: Default_config_type = Default_config_type.Defa
         return
     with open("config.json", "w", encoding="utf-8") as f:
         if type == Default_config_type.Default:
-            f.write(json.dumps(default_config.model_dump(exclude_none=True), indent=2, sort_keys=False, ensure_ascii=False))
+            f.write(default_config.model_dump_json(exclude_none=True, indent=2))
         elif type == Default_config_type.ZJU:
-            f.write(json.dumps(default_zju_config.model_dump(exclude_none=True), indent=2, sort_keys=False, ensure_ascii=False))
+            f.write(default_zju_config.model_dump_json(exclude_none=True, indent=2))
 
 def load_config() -> typing.Optional[User_config]:
     if not os.path.exists("config.json"):

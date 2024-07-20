@@ -1,8 +1,30 @@
 from .type import User_config_outbound, User_config_route, User_config
-from type.inbound import Inbound, Mixed
+from type.inbound import Inbound, Mixed, Tun
 from type.experimental import Experimental, Cache_file, Clash_api
 from type.log import Log
 from type.dns import Dns, Server, Rule
+
+# inbounds
+INBOUDS = [
+    Mixed(
+        tag="mixed-in",
+        listen="0.0.0.0",
+        listen_port=7890,
+        sniff=True,
+        domain_strategy="prefer_ipv6"
+    ),
+    Tun(
+        tag="tun-in",
+        auto_route=True,
+        stack="system",
+        sniff=True,
+        address=[
+            "172.18.0.1/30",
+            "fdfe:dcba:9876::1/126"
+        ],
+        domain_strategy="prefer_ipv6",
+    )
+]
 
 # some helper constants
 NONE_RULE_TAGS = [
@@ -29,10 +51,9 @@ default_config = User_config(
         ],
         final="AliDNS",
         rules=[
-            Rule(outbound=["any"], server="AliDNS"),
-            Rule(outbound=["direct"], server="CfDNS"),
-            Rule(outbound=["🚀 节点选择"], server="CfDNS"),
             Rule(ip_cidr=["240.0.0.0/4"], server="CfDNS"),
+            Rule(outbound=["direct"], server="AliDNS"),
+            Rule(outbound=["any"], server="AliDNS"),
         ]
     ),
     experimental=Experimental(
@@ -42,13 +63,7 @@ default_config = User_config(
             default_mode="Rule"
         )
     ),
-    inbounds=[
-        Mixed(
-            tag="mixed-in",
-            listen="0.0.0.0",
-            listen_port=7890
-        )
-    ],
+    inbounds=INBOUDS,
     outbounds=[
         User_config_outbound(
             tag="🚀 节点选择",
@@ -379,11 +394,10 @@ default_zju_config = User_config(
         ],
         final="AliDNS",
         rules=[
-            Rule(outbound=["any"], server="AliDNS"),
-            Rule(outbound=["direct"], server="CfDNS"),
-            Rule(outbound=["🚀 节点选择"], server="CfDNS"),
-            Rule(rule_set=["ZJU"], server="ZJUDNS"),
             Rule(ip_cidr=["240.0.0.0/4"], server="CfDNS"),
+            Rule(rule_set=["ZJU"], server="ZJUDNS"),
+            Rule(outbound=["direct"], server="CfDNS"),
+            Rule(outbound=["any"], server="AliDNS"),
         ]
     ),
     experimental=Experimental(
@@ -393,13 +407,7 @@ default_zju_config = User_config(
             default_mode="Rule"
         )
     ),
-    inbounds=[
-        Mixed(
-            tag="mixed-in",
-            listen="0.0.0.0",
-            listen_port=7890
-        )
-    ],
+    inbounds=INBOUDS,
     outbounds=[
         User_config_outbound(
             tag="🚀 节点选择",

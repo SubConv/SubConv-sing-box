@@ -10,12 +10,12 @@ from .dns import get_dns
 
 import typing
 
-def get_config(nodes: list[Outbound], base_url: str) -> typing.Optional[Config]:
+def get_config(nodes: list[Outbound], base_url: str, tun: bool) -> typing.Optional[Config]:
     return Config(
         experimental=get_experimental(),
         log=get_log(),
         dns=get_dns(),
-        inbounds=get_inbounds(),
+        inbounds=get_inbounds(tun=tun),
         outbounds=get_outbounds(nodes),
         route=get_route(base_url)
     )
