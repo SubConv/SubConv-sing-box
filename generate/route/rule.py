@@ -14,6 +14,15 @@ def get_rules(base_url: URL) -> list[Rule]:
             domain=[re.search(r"([^:]+)(:\d{1,5})?", base_url.hostname).group(1)],
             outbound="direct"
         ),
+        # add clash_api route
+        Rule(
+            clash_mode="Direct",
+            outbound="direct"
+        ),
+        Rule(
+            clash_mode="Global",
+            outbound="Global"
+        ),
         # add dns route
         Rule(
             protocol=["dns"],

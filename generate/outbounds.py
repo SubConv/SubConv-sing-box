@@ -45,6 +45,7 @@ def get_outbounds(nodes: list[Outbound]) -> typing.Optional[list[Outbound]]:
         Block(tag="block"),
         Dns(tag="dns-out")
     ])
+    result.append(Selector(tag="Global", outbounds=[node.tag for node in result]))
 
     # remove non-existent outbounds
     outbound_tags = [outbound.tag for outbound in result]
