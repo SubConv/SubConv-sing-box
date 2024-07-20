@@ -3,7 +3,7 @@ logger = logging.getLogger(__name__)
 
 from .default_config import default_config, default_zju_config
 from .type import User_config
-from type.inbound import Direct, Mixed, Socks, Http
+from type.inbound import Direct, Mixed, Socks, Http, Tun
 
 import json
 import os
