@@ -49,20 +49,31 @@ class Http(Listen, Inbound):
 class Tun(Listen, Inbound):
     listen: str = None # `listen` is not required for tun inbound
     interface_name: str = None
-    address: list[str]
+
+    # address: list[str]
+    inet4_address: list[str]
+    inet6_address: list[str]
+
     mtu: int = None
     gso: bool = None
     auto_route: bool = None
-    iproute2_table_index: int = None
-    iproute2_rule_index: int = None
-    auto_redirect: bool = None
-    auto_redirect_input_mark: str = None
-    auto_redirect_output_mark: str = None
+    # iproute2_table_index: int = None
+    # iproute2_rule_index: int = None
+    # auto_redirect: bool = None
+    # auto_redirect_input_mark: str = None
+    # auto_redirect_output_mark: str = None
     strict_route: bool = None
-    route_address: list[str] = None
-    route_exclude_address: list[str] = None
-    route_address_set: list[str] = None
-    route_exclude_address_set: list[str] = None
+
+    # route_address: list[str] = None
+    inet4_route_address: list[str] = None
+    inet6_route_address: list[str] = None
+
+    # route_exclude_address: list[str] = None
+    inet4_route_exclude_address: list[str] = None
+    inet6_route_exclude_address: list[str] = None
+
+    # route_address_set: list[str] = None
+    # route_exclude_address_set: list[str] = None
     endpoint_independent_nat: bool = None
     udp_timeout: str = None
     stack: str = None
