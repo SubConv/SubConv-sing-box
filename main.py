@@ -104,6 +104,9 @@ async def sub(request: Request):
 # proxy
 @app.get("/proxy")
 async def proxy(request: Request, url: str):
+    # check if the url is allowed
+    if not url.startswith(config_instance.proxy_prefix):
+        raise HTTPException(status_code=403, detail="Forbidden")
     # file was big so use stream
     async def stream():
         async with httpx.AsyncClient() as client:

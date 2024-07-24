@@ -1,8 +1,7 @@
 {
   "log": {
     "disabled": false,
-    "level": "info",
-    "timestamp": false
+    "level": "info"
   },
   "dns": {
     "servers": [
@@ -680,5 +679,6 @@
       ]
     ],
     "final": "🐟 漏网之鱼"
-  }
+  },
+  "proxy_prefix": "https://raw.githubusercontent.com/SubConv/ZJU-Rule/sing-box"
 }
