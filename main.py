@@ -36,6 +36,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--port", "-P", type=int, default=8000, help="port of the api, default: 8000")
     parser.add_argument("--host", "-H", type=str, default="0.0.0.0", help="host of the api, default: 0.0.0.0")
+    parser.add_argument("--workers", "-W", type=int, default=4, help="number of workers, default: 4")
     parser.add_argument("--generate-config", "-G", type=str, choices=("default", "zju"), action=GenerateConfigAction, help="generate a default config file")
     args = parser.parse_args()
 
@@ -45,14 +46,11 @@ if __name__ == "__main__":
         print("Failed to load config.json, exiting")
         exit(1)
 
-    module_name = __name__.split(".")[0]
-    uvicorn.run(f"{module_name}:app", host=args.host, port=args.port, workers=4)
 
 from generate import get_config
 from parse import get_nodes
-from type import outbound
 
-import json
+from config.config import config_instance
 
 app = FastAPI()
 
@@ -132,3 +130,8 @@ async def index(path):
         return FileResponse("static/"+path)
     else:
         raise HTTPException(status_code=404, detail="Not Found")
+
+
+if __name__ == "__main__":
+    module_name = __name__.split(".")[0]
+    uvicorn.run(f"{module_name}:app", host=args.host, port=args.port, workers=args.workers)
