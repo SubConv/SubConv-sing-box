@@ -26,7 +26,7 @@ COPY --from=builder /app/main.bin /app/main.bin
 COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY static /app/static
-COPY config.yaml /app/config.yaml
+COPY config.json /app/config.json
 
 EXPOSE 8080
 
