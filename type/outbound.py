@@ -54,7 +54,7 @@ class Shadowsocks(Outbound):
     server: str
     server_port: int
     method: str
-    method: str
+    password: str
     plugin: Optional[str] = None
     plugin_opts: Optional[str] = None
     network: Optional[Network] = None
