@@ -17,6 +17,7 @@ from pathlib import Path
 import os
 import re
 import argparse
+from sys import exit
 
 DISALLOW_ROBOTS = bool(eval(os.environ.get("DISALLOW_ROBOTS", "False")))
 
