@@ -1,0 +1,27 @@
+name: Build and push dev Docker image
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+    paths:
+      - '.github/workflows/build-image.yml'
+      - '.github/workflows/build-image-dev.yml'
+      - 'Dockerfile'
+      - '**.py'
+      - 'static/**'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-push:
+    if: github.repository == 'SubConv/SubConv-sing-box'
+    uses: ./.github/workflows/build-image.yml
+    secrets: inherit
+    with:
+      tags: dev

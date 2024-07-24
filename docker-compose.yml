@@ -1,0 +1,9 @@
+services:
+  subconv:
+    image: wouisb/subconv-sing-box:latest
+    container_name: subconv-sing-box
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config.yml:/app/config.yml
