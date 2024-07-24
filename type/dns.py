@@ -1,70 +1,70 @@
 from .common import Strategy, IpVersion, Network, Protocol
-import typing
+from typing import Optional, Union
 
 from pydantic import BaseModel
 
 class Server(BaseModel):
     address: str
-    tag: str = None
-    address_resolver: str = None
-    address_strategy: Strategy = None
-    strategy: Strategy = None
-    detour: str = None
-    client_subnet: str = None
+    tag: Optional[str] = None
+    address_resolver: Optional[str] = None
+    address_strategy: Optional[Strategy] = None
+    strategy: Optional[Strategy] = None
+    detour: Optional[str] = None
+    client_subnet: Optional[str] = None
 
 class Rule(BaseModel):
-    inbound: list[str] = None
+    inbound: Optional[list[str]] = None
     server: str
-    ip_version: IpVersion = None
-    query_type: list[typing.Union[int, str]] = None
-    network: Network = None
-    auth_user: list[str] = None
-    protocol: list[Protocol] = None
-    domain: list[str] = None
-    domain_suffix: list[str] = None
-    domain_keyword: list[str] = None
-    domain_regex: list[str] = None
-    source_ip_cidr: list[str] = None
-    source_ip_is_private: bool = None
-    source_port: list[int] = None
-    source_port_range: list[str] = None
-    port: list[int] = None
-    port_range: list[str] = None
-    process_name: list[str] = None
-    process_path: list[str] = None
-    package_name: list[str] = None
-    user: list[str] = None
-    user_id: list[int] = None
-    clash_mode: str = None
-    wifi_ssid: list[str] = None
-    wifi_bssid: list[str] = None
-    rule_set: list[str] = None
-    rule_set_ip_cidr_match_source: bool = None
-    invert: bool = None
-    outbound: list[str] = None
-    disable_cache: bool = None
-    rewrite_ttl: int = None
-    client_subnet: str = None
-    geoip: list[str] = None
-    ip_cidr: list[str] = None
-    ip_is_private: bool = None
-    rule_set_ip_cidr_accept_empty: bool = None
+    ip_version: Optional[IpVersion] = None
+    query_type: Optional[list[Union[int, str]]] = None
+    network: Optional[Network] = None
+    auth_user: Optional[list[str]] = None
+    protocol: Optional[list[Protocol]] = None
+    domain: Optional[list[str]] = None
+    domain_suffix: Optional[list[str]] = None
+    domain_keyword: Optional[list[str]] = None
+    domain_regex: Optional[list[str]] = None
+    source_ip_cidr: Optional[list[str]] = None
+    source_ip_is_private: Optional[bool] = None
+    source_port: Optional[list[int]] = None
+    source_port_range: Optional[list[str]] = None
+    port: Optional[list[int]] = None
+    port_range: Optional[list[str]] = None
+    process_name: Optional[list[str]] = None
+    process_path: Optional[list[str]] = None
+    package_name: Optional[list[str]] = None
+    user: Optional[list[str]] = None
+    user_id: Optional[list[int]] = None
+    clash_mode: Optional[str] = None
+    wifi_ssid: Optional[list[str]] = None
+    wifi_bssid: Optional[list[str]] = None
+    rule_set: Optional[list[str]] = None
+    rule_set_ip_cidr_match_source: Optional[bool] = None
+    invert: Optional[bool] = None
+    outbound: Optional[list[str]] = None
+    disable_cache: Optional[bool] = None
+    rewrite_ttl: Optional[int] = None
+    client_subnet: Optional[str] = None
+    geoip: Optional[list[str]] = None
+    ip_cidr: Optional[list[str]] = None
+    ip_is_private: Optional[bool] = None
+    rule_set_ip_cidr_accept_empty: Optional[bool] = None
 
 
 class Fakeip(BaseModel):
     enabled: bool = True
-    inet4_range: str = None
-    inet6_range: str = None
+    inet4_range: Optional[str] = None
+    inet6_range: Optional[str] = None
 
 
 class Dns(BaseModel):
-    servers: list[Server] = None
-    rules: list[Rule] = None
-    final: str = None
-    strategy: Strategy = None
-    disable_cache: bool = None
-    disable_expire: bool = None
-    independent_cache: bool = None
-    reverse_mapping: bool = None
-    client_subnet: str = None
-    fakeip: Fakeip = None
+    servers: Optional[list[Server]] = None
+    rules: Optional[list[Rule]] = None
+    final: Optional[str] = None
+    strategy: Optional[Strategy] = None
+    disable_cache: Optional[bool] = None
+    disable_expire: Optional[bool] = None
+    independent_cache: Optional[bool] = None
+    reverse_mapping: Optional[bool] = None
+    client_subnet: Optional[str] = None
+    fakeip: Optional[Fakeip] = None

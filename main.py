@@ -86,9 +86,12 @@ async def sub(request: Request):
     # get the nodes from original subscription
     nodes = []
     for url in urls:
-        async with httpx.AsyncClient() as client:
-            response = await client.get(url, headers={"User-Agent": "sing-box"})
-            nodes.extend(get_nodes(response.text))
+        if url.startswith("http://") or url.startswith("https://") and not url.startswith("https://t.me"):
+            async with httpx.AsyncClient() as client:
+                response = await client.get(url, headers={"User-Agent": request.headers["User-Agent"]})
+                nodes.extend(get_nodes(response.text))
+        else:
+            nodes.extend(get_nodes(url))
 
     # get the config from nodes
     config = get_config(nodes=nodes, base_url=request.base_url, tun=tun)
@@ -104,7 +107,7 @@ async def proxy(request: Request, url: str):
     # file was big so use stream
     async def stream():
         async with httpx.AsyncClient() as client:
-            async with client.stream("GET", url, headers={'User-Agent':request.headers['User-Agent']}) as resp:
+            async with client.stream("GET", url, headers={"User-Agent":request.headers["User-Agent"]}) as resp:
                 yield resp.status_code
                 yield resp.headers
                 if resp.status_code < 200 or resp.status_code >= 400:

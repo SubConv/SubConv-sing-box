@@ -1,8 +1,7 @@
 from ..common import IpVersion, Network, Protocol
 
 from pydantic import BaseModel
-
-import typing
+from typing import Optional, Union
 
 def rule_set(type: str):
     def wrapper(cls):
@@ -18,24 +17,24 @@ class Rule_set(BaseModel):
     tag: str
 
 class HeadlessRule(BaseModel):
-    query_type: typing.List[typing.Union[int, str]] = None
-    network: list[str] = None
-    domain: list[str] = None
-    domain_suffix: list[str] = None
-    domain_keyword: list[str] = None
-    domain_regex: list[str] = None
-    source_ip_cidr: list[str] = None
-    ip_cidr: list[str] = None
-    source_port: list[int] = None
-    source_port_range: list[str] = None
-    port: list[int] = None
-    port_range: list[str] = None
-    process_name: list[str] = None
-    process_path: list[str] = None
-    package_name: list[str] = None
-    wifi_ssid: list[str] = None
-    wifi_bssid: list[str] = None
-    invert: bool = None
+    query_type: Optional[list[Union[int, str]]] = None
+    network: Optional[list[str]] = None
+    domain: Optional[list[str]] = None
+    domain_suffix: Optional[list[str]] = None
+    domain_keyword: Optional[list[str]] = None
+    domain_regex: Optional[list[str]] = None
+    source_ip_cidr: Optional[list[str]] = None
+    ip_cidr: Optional[list[str]] = None
+    source_port: Optional[list[int]] = None
+    source_port_range: Optional[list[str]] = None
+    port: Optional[list[int]] = None
+    port_range: Optional[list[str]] = None
+    process_name: Optional[list[str]] = None
+    process_path: Optional[list[str]] = None
+    package_name: Optional[list[str]] = None
+    wifi_ssid: Optional[list[str]] = None
+    wifi_bssid: Optional[list[str]] = None
+    invert: Optional[bool] = None
 
 @rule_set("inline")
 class Inline(Rule_set):
@@ -50,5 +49,5 @@ class Local(Rule_set):
 class Remote(Rule_set):
     format: str
     url: str
-    download_detour: str = None
-    update_interval: str =None
+    download_detour: Optional[str] = None
+    update_interval: Optional[str] = None

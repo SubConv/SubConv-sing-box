@@ -1,8 +1,9 @@
 from type import outbound
 from . import sing_box
+from . import share_link
 
-import typing
+from typing import Optional
 
 
-def get_nodes(text: str) -> typing.Optional[list[outbound.Outbound]]:
-    return sing_box.get_nodes(text)
+def get_nodes(text: str) -> Optional[list[outbound.Outbound]]:
+    return sing_box.get_nodes(text) or share_link.get_nodes(text)

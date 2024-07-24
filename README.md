@@ -10,7 +10,7 @@ This is a subscription converter for sing-box.
 
 - [x] parse nodes from sing-box config
 - [ ] parse nodes from mihomo config
-- [ ] parse nodes from share link
+- [x] parse nodes from share link
 - [ ] rewrite the web ui (**the current one is literally copied from [SubConv](https://github.com/SubConv/SubConv)**)
 
 ## Development Guide

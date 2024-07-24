@@ -7,7 +7,7 @@ from type.inbound import Direct, Mixed, Socks, Http, Tun
 
 import json
 import os
-import typing
+from typing import Optional
 import enum
 
 class Default_config_type(enum.Enum):
@@ -26,7 +26,7 @@ def generate_default_config(type: Default_config_type = Default_config_type.Defa
         elif type == Default_config_type.ZJU:
             f.write(default_zju_config.model_dump_json(exclude_none=True, indent=2))
 
-def load_config() -> typing.Optional[User_config]:
+def load_config() -> Optional[User_config]:
     if not os.path.exists("config.json"):
         logger.error("config.json not found, please run --help to see how to generate a default config")
         return None

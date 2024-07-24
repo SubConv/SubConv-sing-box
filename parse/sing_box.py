@@ -8,10 +8,10 @@ from type import outbound
 from type.common import v2transport
 
 import json
-import typing
+from typing import Optional
 
 
-def get_nodes(text: str) -> typing.Optional[list[outbound.Outbound]]:
+def get_nodes(text: str) -> Optional[list[outbound.Outbound]]:
     result = []
 
     try:

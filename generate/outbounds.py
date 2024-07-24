@@ -5,10 +5,10 @@ from config.config import config_instance
 from type.outbound import Outbound, Selector, Urltest, Direct, Block, Dns
 from parse import get_nodes
 
-import typing
+from typing import Optional
 import re
 
-def get_outbounds(nodes: list[Outbound]) -> typing.Optional[list[Outbound]]:
+def get_outbounds(nodes: list[Outbound]) -> Optional[list[Outbound]]:
     result: list[Outbound] = []
 
     # Get nodes from the data

@@ -1,5 +1,6 @@
 from . import v2transport
 
+from typing import Optional
 import enum
 from pydantic import BaseModel
 
@@ -28,39 +29,39 @@ class Protocol(enum.Enum):
 
 class Listen(BaseModel):
     listen: str
-    listen_port: int = None
-    tcp_fast_open: bool = None
-    tcp_multi_path: bool = None
-    udp_fragment: bool = None
-    udp_timeout: str = None
-    detour: str = None
-    sniff: bool = None
-    sniff_override_destination: bool = None
-    sniff_timeout: str = None
-    domain_strategy: Strategy = None
-    udp_disable_domain_unmapping: bool = None
+    listen_port: Optional[int] = None
+    tcp_fast_open: Optional[bool] = None
+    tcp_multi_path: Optional[bool] = None
+    udp_fragment: Optional[bool] = None
+    udp_timeout: Optional[str] = None
+    detour: Optional[str] = None
+    sniff: Optional[bool] = None
+    sniff_override_destination: Optional[bool] = None
+    sniff_timeout: Optional[str] = None
+    domain_strategy: Optional[Strategy] = None
+    udp_disable_domain_unmapping: Optional[bool] = None
 
 class Utls(BaseModel):
     enabled: bool = True
-    fingerprint: str = None
+    fingerprint: Optional[str] = None
 
 class Reality(BaseModel):
     public_key: str
     short_id: str
     enabled: bool = True
-    max_time_difference: str = None
+    max_time_difference: Optional[str] = None
 
 class Tls(BaseModel):
     enabled: bool = True
-    disable_sni: bool = None
-    server_name: str = None
-    insecure: bool = None
-    alpn: list[str] = None
-    min_version: str = None
-    max_version: str = None
-    cipher_suites: list[str] = None
-    utls: Utls = None
-    reality: Reality = None
+    disable_sni: Optional[bool] = None
+    server_name: Optional[str] = None
+    insecure: Optional[bool] = None
+    alpn: Optional[list[str]] = None
+    min_version: Optional[str] = None
+    max_version: Optional[str] = None
+    cipher_suites: Optional[list[str]] = None
+    utls: Optional[Utls] = None
+    reality: Optional[Reality] = None
 
 class Brutal(BaseModel):
     up_mbps: int
@@ -69,16 +70,16 @@ class Brutal(BaseModel):
 
 class Multiplex(BaseModel):
     enabled: bool = True
-    protocol: str = None
-    max_connections: int = None
-    min_streams: int = None
-    max_streams: int = None
-    padding: bool = None
-    brutal: Brutal = None
+    protocol: Optional[str] = None
+    max_connections: Optional[int] = None
+    min_streams: Optional[int] = None
+    max_streams: Optional[int] = None
+    padding: Optional[bool] = None
+    brutal: Optional[Brutal] = None
 
 class Udp_over_tcp(BaseModel):
     enabled: bool = True
-    version: int = None
+    version: Optional[int] = None
 
 
 __all__ = [

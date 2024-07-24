@@ -8,9 +8,9 @@ from .experimental import get_experimental
 from .log import get_log
 from .dns import get_dns
 
-import typing
+from typing import Optional
 
-def get_config(nodes: list[Outbound], base_url: str, tun: bool) -> typing.Optional[Config]:
+def get_config(nodes: list[Outbound], base_url: str, tun: bool) -> Optional[Config]:
     return Config(
         experimental=get_experimental(),
         log=get_log(),

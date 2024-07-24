@@ -1,7 +1,7 @@
-import typing
+from typing import TypeVar
 from pydantic import BaseModel
 
-_T = typing.TypeVar('_T')
+_T = TypeVar('_T')
 
 def v2transport(type: str):
     def wrapper(cls: _T) -> _T:

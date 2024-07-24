@@ -1,9 +1,9 @@
 from .common import Network, Listen
 
-import typing
+from typing import Optional, TypeVar
 from pydantic import BaseModel
 
-_T = typing.TypeVar('_T')
+_T = TypeVar('_T')
 
 def inbound(type: str):
     """
@@ -27,63 +27,63 @@ class Inbound(BaseModel):
 
 @inbound("direct")
 class Direct(Listen, Inbound):
-    network: Network = None
-    override_address: str = None
-    override_port: int = None
+    network: Optional[Network] = None
+    override_address: Optional[str] = None
+    override_port: Optional[int] = None
 
 @inbound("mixed")
 class Mixed(Listen, Inbound):
-    users: list[dict[str, str]] = None
-    set_system_proxy: bool = None
+    users: Optional[list[dict[str, str]]] = None
+    set_system_proxy: Optional[bool] = None
 
 @inbound("socks")
 class Socks(Listen, Inbound):
-    users: list[dict[str, str]] = None
+    users: Optional[list[dict[str, str]]] = None
 
 @inbound("http")
 class Http(Listen, Inbound):
-    users: list[dict[str, str]] = None
-    set_system_proxy: bool = None
+    users: Optional[list[dict[str, str]]] = None
+    set_system_proxy: Optional[bool] = None
 
 @inbound("tun")
 class Tun(Listen, Inbound):
-    listen: str = None # `listen` is not required for tun inbound
-    interface_name: str = None
+    listen: Optional[str] = None # `listen` is not required for tun inbound
+    interface_name: Optional[str] = None
 
     # address: list[str]
     inet4_address: list[str]
     inet6_address: list[str]
 
-    mtu: int = None
-    gso: bool = None
-    auto_route: bool = None
-    # iproute2_table_index: int = None
-    # iproute2_rule_index: int = None
-    # auto_redirect: bool = None
-    # auto_redirect_input_mark: str = None
-    # auto_redirect_output_mark: str = None
-    strict_route: bool = None
+    mtu: Optional[int] = None
+    gso: Optional[bool] = None
+    auto_route: Optional[bool] = None
+    # iproute2_table_index: Optional[int] = None
+    # iproute2_rule_index: Optional[int] = None
+    # auto_redirect: Optional[bool] = None
+    # auto_redirect_input_mark: Optional[str] = None
+    # auto_redirect_output_mark: Optional[str] = None
+    strict_route: Optional[bool] = None
 
-    # route_address: list[str] = None
-    inet4_route_address: list[str] = None
-    inet6_route_address: list[str] = None
+    # route_address: Optional[list[str]] = None
+    inet4_route_address: Optional[list[str]] = None
+    inet6_route_address: Optional[list[str]] = None
 
-    # route_exclude_address: list[str] = None
-    inet4_route_exclude_address: list[str] = None
-    inet6_route_exclude_address: list[str] = None
+    # route_exclude_address: Optional[list[str]] = None
+    inet4_route_exclude_address: Optional[list[str]] = None
+    inet6_route_exclude_address: Optional[list[str]] = None
 
-    # route_address_set: list[str] = None
-    # route_exclude_address_set: list[str] = None
-    endpoint_independent_nat: bool = None
-    udp_timeout: str = None
-    stack: str = None
-    include_interface: list[str] = None
-    exclude_interface: list[str] = None
-    include_uid: list[int] = None
-    include_uid_range: list[str] = None
-    exclude_uid: list[int] = None
-    exclude_uid_range: list[str] = None
-    include_android_user: list[int] = None
-    include_package: list[str] = None
-    exclude_package: list[str] = None
-    platform: dict = None
+    # route_address_set: Optional[list[str]] = None
+    # route_exclude_address_set: Optional[list[str]] = None
+    endpoint_independent_nat: Optional[bool] = None
+    udp_timeout: Optional[str] = None
+    stack: Optional[str] = None
+    include_interface: Optional[list[str]] = None
+    exclude_interface: Optional[list[str]] = None
+    include_uid: Optional[list[int]] = None
+    include_uid_range: Optional[list[str]] = None
+    exclude_uid: Optional[list[int]] = None
+    exclude_uid_range: Optional[list[str]] = None
+    include_android_user: Optional[list[int]] = None
+    include_package: Optional[list[str]] = None
+    exclude_package: Optional[list[str]] = None
+    platform: Optional[dict] = None
