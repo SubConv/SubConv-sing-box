@@ -18,6 +18,7 @@ import os
 import re
 import argparse
 from sys import exit
+from distutils.util import strtobool
 
 DISALLOW_ROBOTS = bool(eval(os.environ.get("DISALLOW_ROBOTS", "False")))
 
@@ -76,7 +77,8 @@ async def sub(request: Request):
 
     # get the url of original subscription
     url = args.get("url")
-    tun: bool = args.get("tun", True)
+    # tun: bool = args.get("tun", True)
+    tun: bool = bool(strtobool(args.get("tun", "true")))
 
     url = re.split(r"[|\n]", url)
     # remove empty lines
