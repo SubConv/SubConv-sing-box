@@ -50,30 +50,24 @@ class Tun(Listen, Inbound):
     listen: Optional[str] = None # `listen` is not required for tun inbound
     interface_name: Optional[str] = None
 
-    # address: list[str]
-    inet4_address: list[str]
-    inet6_address: list[str]
+    address: list[str]
 
     mtu: Optional[int] = None
     gso: Optional[bool] = None
     auto_route: Optional[bool] = None
-    # iproute2_table_index: Optional[int] = None
-    # iproute2_rule_index: Optional[int] = None
-    # auto_redirect: Optional[bool] = None
-    # auto_redirect_input_mark: Optional[str] = None
-    # auto_redirect_output_mark: Optional[str] = None
+    iproute2_table_index: Optional[int] = None
+    iproute2_rule_index: Optional[int] = None
+    auto_redirect: Optional[bool] = None
+    auto_redirect_input_mark: Optional[str] = None
+    auto_redirect_output_mark: Optional[str] = None
     strict_route: Optional[bool] = None
 
-    # route_address: Optional[list[str]] = None
-    inet4_route_address: Optional[list[str]] = None
-    inet6_route_address: Optional[list[str]] = None
+    route_address: Optional[list[str]] = None
 
-    # route_exclude_address: Optional[list[str]] = None
-    inet4_route_exclude_address: Optional[list[str]] = None
-    inet6_route_exclude_address: Optional[list[str]] = None
+    route_exclude_address: Optional[list[str]] = None
 
-    # route_address_set: Optional[list[str]] = None
-    # route_exclude_address_set: Optional[list[str]] = None
+    route_address_set: Optional[list[str]] = None
+    route_exclude_address_set: Optional[list[str]] = None
     endpoint_independent_nat: Optional[bool] = None
     udp_timeout: Optional[str] = None
     stack: Optional[str] = None

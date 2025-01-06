@@ -16,6 +16,8 @@ class Clash_api(BaseModel):
     external_ui_download_detour: Optional[str] = None
     secret: Optional[str] = None
     default_mode: Optional[str] = None
+    access_control_allow_origin: Optional[list[str]] = None
+    access_control_allow_private_network: Optional[bool] = None
 
 class V2ray_api_stat(BaseModel):
     enabled: Optional[bool] = None

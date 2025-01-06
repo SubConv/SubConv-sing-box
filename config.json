@@ -61,10 +61,8 @@
       "tag": "tun-in",
       "sniff": true,
       "domain_strategy": "prefer_ipv6",
-      "inet4_address": [
-        "172.18.0.1/30"
-      ],
-      "inet6_address": [
+      "address": [
+        "172.18.0.1/30",
         "fdfe:dcba:9876::1/126"
       ],
       "auto_route": true,

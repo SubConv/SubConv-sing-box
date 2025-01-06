@@ -18,14 +18,8 @@ INBOUDS = [
         auto_route=True,
         stack="system",
         sniff=True,
-        # address=[
-        #     "172.18.0.1/30",
-        #     "fdfe:dcba:9876::1/126"
-        # ],
-        inet4_address=[
+        address=[
             "172.18.0.1/30",
-        ],
-        inet6_address=[
             "fdfe:dcba:9876::1/126"
         ],
         domain_strategy="prefer_ipv6",
