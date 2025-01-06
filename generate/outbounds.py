@@ -22,7 +22,7 @@ def get_outbounds(nodes: list[Outbound]) -> Optional[list[Outbound]]:
             outbounds = outbound.outbounds.copy() if outbound.outbounds is not None else []
             if outbound.regex is not None:
                 for node_tag in node_tags:
-                    if re.match(outbound.regex, node_tag):
+                    if re.search(outbound.regex, node_tag):
                         outbounds.append(node_tag)
             if len(outbounds) > 0:
                 result.append(eval(outbound.type.capitalize())(
